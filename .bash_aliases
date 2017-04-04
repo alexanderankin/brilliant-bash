@@ -139,3 +139,10 @@ alias download="wget --random-wait -r -p --no-parent -e robots=off -U mozilla"
 ### also display the ip address of the server
 ### to access the server on another pc, go to ip:port (generally 8000)
 alias server="ifconfig | grep inet\ addr && python3 -m http.server"
+
+### start an FTP server in the current folder (useful for wordpress
+### development). Sometimes you change the world with apps that #disrupt,
+### sometimes, you turn to the PHP as the liberator of the people.
+### installs with `pip install pyftpdlib` (tested with python2.7)
+alias ftpserver="python -m pyftpdlib -w"
+
