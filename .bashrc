@@ -11,60 +11,16 @@
 #
 # A handful of bash aliases to strengthen the bond between you and your machine.
 #
-# All you can eat. Take whatever you want/need.
+# Add this line to your .bashrc, to avoid any breaking aliases or functions.
 ###############################################################################
 
-### weather: pass your city or zip code, and it returns the weather!
-### USAGE - weather cleveland
-###         OR
-###         weather 44106
-### WARNING - city and zip code args may yield inaccurate/different results.
-weather() { curl wttr.in/"$1"; }
+### Don't enable any fancy or potentially breaking features
+### if the shell session is non-interactive
+if [[ $- != *i* ]] ; then
+        return
+fi
 
-### myip: prints out your IP address. Handy to check if your VPN is on!
-alias myip="curl icanhazip.com"
-
-### plz: re-run the last command as root.
-alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
-
-### ls but better: add some color to your life.
-alias ls="ls --color=auto"
-
-### a more verbose, colorful ls: see almost everything!
-alias lsm="ls -lAhG --color=auto"
-
-### up: cd .. when you're too lazy to use the spacebar
-alias up="cd .."
-
-### cls: a better clear with listed directories.
-### DEPENDENCY - lsm (see above)
-alias cls="clear;lsm"
-
-### update: update all of your packages!
-alias update="sudo pacman -Syyu"
-
-### ports: lists all ports open and which programs are using them
-### TIP - add ports to your NOPASSWD list.
-alias ports="sudo netstat -tulpn"
-
-### space: gets space left on disk
-alias space="df -h"
-
-### incognito: no saving your command history!
-incognito() {
-  case $1 in
-    start)
-    set +o history;;
-    stop)
-    set -o history;;
-    *)
-    echo -e "USAGE: incognito start - disable command history.
-       incognito stop  - enable command history.";;
-  esac
-}
-
-### gpom: simplistic git push origin master .
-alias gpom="git push origin master"
-
-### restart: a quick refresh for your shell instance.
-alias restart="source ~/.bashrc"
+# source the .bash_aliases file. This is a set of 3 lines that users of other shells (zsh, ksh, ...) can add to quickly use the aliases
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
